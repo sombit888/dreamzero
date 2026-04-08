@@ -792,7 +792,16 @@ class WANPolicyHead(ActionHead):
                 action_loss_per_sample = torch.nn.functional.mse_loss(
                     action_noise_pred.float(), training_target_action.float(), reduction='none'
                 ) * action_mask  # shape: [B, ...]
-                action_loss_per_sample = has_real_action[:, None].float() * action_loss_per_sample  # apply has_real_action
+
+                # Some collators/transforms may produce has_real_action with extra trailing dims.
+                # Convert to one boolean gate per sample, then broadcast over action loss dims.
+                has_real_action_per_sample = has_real_action
+                if has_real_action_per_sample.ndim > 1:
+                    has_real_action_per_sample = has_real_action_per_sample.reshape(has_real_action_per_sample.shape[0], -1).any(dim=1)
+                has_real_action_per_sample = has_real_action_per_sample.float()
+                gate_shape = [has_real_action_per_sample.shape[0]] + [1] * (action_loss_per_sample.ndim - 1)
+                action_loss_per_sample = has_real_action_per_sample.reshape(gate_shape) * action_loss_per_sample
+
                 weight_action = action_loss_per_sample.mean(dim=2) * self.scheduler.training_weight(
                     timestep_action.flatten(0, 1),
                 ).unflatten(0, (noise_action.shape[0], noise_action.shape[1])).to(self._device)

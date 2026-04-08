@@ -33,10 +33,10 @@ else
     exit 1
 fi
 
-export DREAMZERO_ROOT="$REPO_ROOT"
+export DREAMZERO_ROOT=/home/sombit_dey/projects/dreamzero
 export DATA_DIR=${DATA_DIR:-/data/dreamzero}
 export PRETRAINED_CKPT_DIR=${PRETRAINED_CKPT_DIR:-/work/sombit_dey/pretrain_ckpt/dream0_droid}
-export WAN_CKPT_DIR=${WAN_CKPT_DIR:-$REPO_ROOT/checkpoints/Wan2.1-I2V-14B-480P}
+export WAN_CKPT_DIR=${WAN_CKPT_DIR:-/home/sombit_dey/checkpoints/Wan2.1-I2V-14B-480P}
 export OUTPUT_DIR=${OUTPUT_DIR:-/scratch/${USER}/dreamzero_droid_wan21_lora_flash}
 export NUM_GPUS=4
 
