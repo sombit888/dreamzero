@@ -35,6 +35,40 @@ def whitespace_clean(text):
     return text
 
 
+def _to_numpy(value: Any) -> np.ndarray:
+    if isinstance(value, np.ndarray):
+        return value
+    if isinstance(value, torch.Tensor):
+        return value.detach().cpu().numpy()
+    return np.asarray(value)
+
+
+def _stack_with_padding(values: List[Any], key: str) -> np.ndarray:
+    arrays = [_to_numpy(v) for v in values]
+    shapes = [arr.shape for arr in arrays]
+
+    if len(set(shapes)) == 1:
+        return np.stack(arrays)
+
+    ndims = {arr.ndim for arr in arrays}
+    if len(ndims) != 1:
+        raise ValueError(
+            f"Cannot collate key '{key}': inconsistent ranks {sorted(ndims)} with shapes {shapes}."
+        )
+
+    # Dynamic padding to the longest shape in this batch (right-padding with zeros),
+    # following the common collator strategy used by HF/PyTorch for variable-length inputs.
+    target_shape = tuple(max(shape[d] for shape in shapes) for d in range(arrays[0].ndim))
+    padded_arrays = []
+    for arr in arrays:
+        pad_width = [(0, target_shape[d] - arr.shape[d]) for d in range(arr.ndim)]
+        if any(pad > 0 for _, pad in pad_width):
+            arr = np.pad(arr, pad_width, mode="constant", constant_values=0)
+        padded_arrays.append(arr)
+
+    return np.stack(padded_arrays)
+
+
 class HuggingfaceTokenizer:
 
     def __init__(self, name, seq_len=None, clean=None, **kwargs):
@@ -160,7 +194,7 @@ def collate(features: List[dict], tokenizer: AutoTokenizer, num_views=3, embodim
             batch['text_attention_mask_negative'] = mask
         else:
             values = [elem[key] for elem in features]
-            batch[key] = torch.from_numpy(np.stack(values))
+            batch[key] = torch.from_numpy(_stack_with_padding(values, key))
     return batch
 
 
