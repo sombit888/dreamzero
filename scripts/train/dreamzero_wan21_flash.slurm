@@ -42,4 +42,4 @@ export NUM_GPUS=4
 
 
 
-srun bash scripts/train/droid_training_wan22_flash.sh
+srun bash scripts/train/droid_training_wan21_flash.sh
