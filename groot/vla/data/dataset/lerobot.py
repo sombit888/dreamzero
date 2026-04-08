@@ -1122,7 +1122,9 @@ class LeRobotSingleDataset(Dataset):
     def _get_trajectories(self) -> tuple[np.ndarray, np.ndarray]:
         """Get the trajectories in the dataset."""
         # Get trajectory lengths, IDs, and whitelist from dataset metadata
+
         episode_path = self.dataset_path / LE_ROBOT_EPISODE_FILENAME
+        print("Reading:", episode_path)
         with open(episode_path, "r") as f:
             episode_metadata = [json.loads(line) for line in f]
         trajectory_ids = []

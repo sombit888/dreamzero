@@ -33,7 +33,7 @@ def main() -> None:
     p = argparse.ArgumentParser(description="Download DreamZero DROID dataset with rate-limit handling.")
     p.add_argument(
         "--local-dir",
-        default=os.environ.get("DROID_DATA_ROOT", "./data/droid_lerobot"),
+        default=os.environ.get("DROID_DATA_ROOT", "/scratch/$USER/data/droid_lerobot"),
         help="Local directory to download into (default: DROID_DATA_ROOT or ./data/droid_lerobot)",
     )
     p.add_argument(
