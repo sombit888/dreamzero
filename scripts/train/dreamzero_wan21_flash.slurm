@@ -6,8 +6,8 @@
 
 #SBATCH --mem=550G
 #SBATCH --time=72:00:00
-#SBATCH --output=/scratch/${USER}/dreamzero-flash-%j.out
-#SBATCH --error=/scratch/${USER}/dreamzero-flash-%j.err
+#SBATCH --output=/scratch/%u/dreamzero_wan21_flash_%j.out
+#SBATCH --error=/scratch/%u/dreamzero_wan21_flash_%j.err
 
 set -euo pipefail
 
@@ -17,7 +17,7 @@ set -euo pipefail
 export REPO_ROOT=/home/sombit_dey/projects/dreamzero
 # Setup and activate environment inside the job.
 # shellcheck disable=SC1091
-# source "$REPO_ROOT/scripts/setup_env.sh"
+source "$REPO_ROOT/scripts/setup_env.sh"
 cd $REPO_ROOT  
 source .venv/bin/activate
 export DREAMZERO_ROOT=/home/sombit_dey/projects/dreamzero
