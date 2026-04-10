@@ -6,8 +6,8 @@
 
 #SBATCH --mem=550G
 #SBATCH --time=72:00:00
-#SBATCH --output=/scratch/%u/dreamzero_wan21_flash_%j.out
-#SBATCH --error=/scratch/%u/dreamzero_wan21_flash_%j.err
+#SBATCH --output=/home/%u/dreamzero_wan21_flash_%j.out
+#SBATCH --error=/home/%u/dreamzero_wan21_flash_%j.err
 
 # set -euo pipefail
 
@@ -25,7 +25,7 @@ export DATA_DIR=/data/dreamzero
 export PRETRAINED_CKPT_DIR=/work/sombit_dey/pretrain_ckpt/dream0_droid
 export WAN_CKPT_DIR=/home/sombit_dey/checkpoints/Wan2.1-I2V-14B-480P
 RUN_TS=$(date +%Y%m%d_%H%M%S)
-export OUTPUT_DIR=/scratch/${USER}/dreamzero_droid_wan21_lora_flash_${RUN_TS}
+export OUTPUT_DIR=/work/${USER}/dreamzero_droid_wan21_lora_flash_${RUN_TS}
 export NUM_GPUS=4
 
 bash scripts/train/droid_training_wan21_flash.sh
