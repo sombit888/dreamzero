@@ -3,7 +3,6 @@
 #SBATCH --nodes=1
 #SBATCH --gres=gpu:h200:4
 #SBATCH --cpus-per-gpu=12
-
 #SBATCH --mem=550G
 #SBATCH --time=72:00:00
 #SBATCH --output=/home/%u/dreamzero_wan21_flash_%j.out
@@ -15,10 +14,8 @@
 # REPO_ROOT="$(cd "$SCRIPT_DIR/../.." && pwd)"
 # cd "$REPO_ROOT"
 export REPO_ROOT=/home/sombit_dey/projects/dreamzero
-# Setup and activate environment inside the job.
-# shellcheck disable=SC1091
-# source "$REPO_ROOT/scripts/setup_env.sh"
 cd $REPO_ROOT  
+source "$REPO_ROOT/scripts/setup_env.sh"
 source .venv/bin/activate
 export DREAMZERO_ROOT=/home/sombit_dey/projects/dreamzero
 export DATA_DIR=/data/dreamzero
