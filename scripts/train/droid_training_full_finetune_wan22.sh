@@ -46,7 +46,7 @@ fi
 # Resume from 100k to 200k: use this same OUTPUT_DIR and run this script with max_steps=200000.
 # If the 100k run completed (saved final model), the code will see config.json and skip training.
 # To force resume: remove config.json from OUTPUT_DIR so the latest checkpoint-* is used, then run.
-OUTPUT_DIR=${OUTPUT_DIR:-"$DREAMZERO_ROOT/checkpoints/dreamzero_droid_wan22_full_finetune"}
+OUTPUT_DIR=${OUTPUT_DIR:-"/scratch/sombit_dey/dreamzero_ckpts/dreamzero_droid_wan22_full_finetune"}
 
 NUM_GPUS=${NUM_GPUS:-4}
 PER_DEVICE_BS=${PER_DEVICE_BS:-1}
@@ -55,9 +55,9 @@ PER_DEVICE_BS=${PER_DEVICE_BS:-1}
 GLOBAL_BATCH_SIZE=${GLOBAL_BATCH_SIZE:-$((NUM_GPUS * PER_DEVICE_BS))}
 
 # Wan2.2-TI2V-5B checkpoint
-WAN22_CKPT_DIR=${WAN22_CKPT_DIR:-"$DREAMZERO_ROOT/checkpoints/Wan2.2-TI2V-5B"}
-IMAGE_ENCODER_DIR=${IMAGE_ENCODER_DIR:-"$DREAMZERO_ROOT/checkpoints/Wan2.1-I2V-14B-480P"}
-TOKENIZER_DIR=${TOKENIZER_DIR:-"$DREAMZERO_ROOT/checkpoints/umt5-xxl"}
+WAN22_CKPT_DIR=${WAN22_CKPT_DIR:-"/scratch/sombit_dey/dreamzero_ckpts/Wan2.2-TI2V-5B"}
+IMAGE_ENCODER_DIR=${IMAGE_ENCODER_DIR:-"/scratch/sombit_dey/dreamzero_ckpts/Wan2.1-I2V-14B-480P"}
+TOKENIZER_DIR=${TOKENIZER_DIR:-"/scratch/sombit_dey/dreamzero_ckpts/umt5-xxl"}
 # =============================================
 
 # ============ AUTO-DOWNLOAD WEIGHTS ============

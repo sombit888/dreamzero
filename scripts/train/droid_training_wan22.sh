@@ -44,15 +44,15 @@ DROID_DATA_ROOT=${DROID_DATA_ROOT:-"$DREAMZERO_ROOT/data/droid_lerobot"}
 if [ "$DROID_DATA_ROOT" = "./data/droid_lerobot" ]; then
     DROID_DATA_ROOT="$DREAMZERO_ROOT/data/droid_lerobot"
 fi
-OUTPUT_DIR=${OUTPUT_DIR:-"$DREAMZERO_ROOT/checkpoints/dreamzero_droid_wan22_lora"}
+OUTPUT_DIR=${OUTPUT_DIR:-"/scratch/sombit_dey/dreamzero_ckpts/dreamzero_droid_wan22_lora"}
 
 # Wan2.2-TI2V-5B checkpoint (contains: diffusion weights, T5, VAE)
-WAN22_CKPT_DIR=${WAN22_CKPT_DIR:-"$DREAMZERO_ROOT/checkpoints/Wan2.2-TI2V-5B"}
+WAN22_CKPT_DIR=${WAN22_CKPT_DIR:-"/scratch/sombit_dey/dreamzero_ckpts/Wan2.2-TI2V-5B"}
 
 # Image encoder: Wan2.2-TI2V-5B does NOT include CLIP - use Wan2.1's or standalone
-IMAGE_ENCODER_DIR=${IMAGE_ENCODER_DIR:-"$DREAMZERO_ROOT/checkpoints/Wan2.1-I2V-14B-480P"}
+IMAGE_ENCODER_DIR=${IMAGE_ENCODER_DIR:-"/scratch/sombit_dey/dreamzero_ckpts/Wan2.1-I2V-14B-480P"}
 
-TOKENIZER_DIR=${TOKENIZER_DIR:-"$DREAMZERO_ROOT/checkpoints/umt5-xxl"}
+TOKENIZER_DIR=${TOKENIZER_DIR:-"/scratch/sombit_dey/dreamzero_ckpts/umt5-xxl"}
 # =============================================
 
 # ============ AUTO-DOWNLOAD WEIGHTS ============

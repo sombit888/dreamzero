@@ -42,12 +42,12 @@ fi
 NUM_GPUS=${NUM_GPUS:-8}
 OUTPUT_DIR=${OUTPUT_DIR:-"/scratch/${USER}/dreamzero_droid_wan21_lora_flash"}
 DATA_DIR=${DATA_DIR:-/data/dreamzero}
-PRETRAINED_CKPT_DIR=${PRETRAINED_CKPT_DIR:-"$DREAMZERO_ROOT/checkpoints/DreamZero-DROID"}
-WAN_CKPT_DIR=${WAN_CKPT_DIR:-"$DREAMZERO_ROOT/checkpoints/Wan2.1-I2V-14B-480P"}
+PRETRAINED_CKPT_DIR=${PRETRAINED_CKPT_DIR:-"/scratch/sombit_dey/dreamzero_ckpts/DreamZero-DROID"}
+WAN_CKPT_DIR=${WAN_CKPT_DIR:-"/scratch/sombit_dey/dreamzero_ckpts/Wan2.1-I2V-14B-480P"}
 
 # Image encoder is included in Wan2.1-I2V-14B-480P.
 IMAGE_ENCODER_DIR=${IMAGE_ENCODER_DIR:-"$WAN_CKPT_DIR"}
-TOKENIZER_DIR=${TOKENIZER_DIR:-"$DREAMZERO_ROOT/checkpoints/umt5-xxl"}
+TOKENIZER_DIR=${TOKENIZER_DIR:-"/scratch/sombit_dey/dreamzero_ckpts/umt5-xxl"}
 # =============================================
 
 # ============ AUTO-DOWNLOAD WEIGHTS ============
